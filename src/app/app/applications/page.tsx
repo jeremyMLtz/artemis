@@ -4,8 +4,11 @@ import { PrismaClient } from "@prisma/client";
 async function getData() {
   const user = await currentUser();
   const prisma = new PrismaClient();
+  if (!user) {
+    return;
+  }
   const applications = await prisma.applications.findMany({
-    where: { userId: user?.id },
+    where: { userId: user.id },
   });
   return applications;
 }
