@@ -5,7 +5,7 @@ async function getData() {
   const user = await currentUser();
   const prisma = new PrismaClient();
   const applications = await prisma.applications.findMany({
-    where: { userId: { equals: user?.id } },
+    where: { userId: user?.id },
   });
   return applications;
 }
